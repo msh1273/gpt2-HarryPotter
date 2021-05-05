@@ -5,7 +5,7 @@ FROM alpine:3.5
 RUN apk add --update py2-pip
 
 # install Python modules needed by the Python app
-COPY ../gpt2flaksproject/requirements.txt /usr/src/app/
+COPY ../requirements.txt /usr/src/app/
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host=files.pythonhosted.org --no-cache-dir -r /usr/src/app/requirements.txt
 
 # copy files required for the app to run
