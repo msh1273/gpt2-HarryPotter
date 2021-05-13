@@ -1,66 +1,75 @@
 function suggestion() {
-    var textarea = document.getElementById("context");
-    var context = textarea.value;
+    var contextarea = document.getElementById("keyword");
+    var context = contextarea.value;
 
-    var models = document.getElementById("model");
-    var model = models.options[models.selectedIndex].value;
-
-    var lengths = document.getElementsByName("length");
-    var length = '';
-    if (lengths[0].checked){
-        length = lengths[0].value;
-    }
-    else{
-        length = lengths[1].value;
-    }
-
+    var model = 'gpt2-harrypotter';
+    var length = 'long';
 
     var formData = new FormData();
-    formData.append("context", context );
+    formData.append("context", context);
     formData.append("model", model);
     formData.append("length", length);
     fetch(
         "/gpt2",
         {
             method: "POST",
-            body:formData
+            body: formData
         }
     )
-    .then(response => {
-        if (response.status == 200){
-            return response
-        }
-        else{
-            throw Error("Failed");
-        }
-    })
-    .then(response => response.json())
-    .then(response => {
-        var items = document.getElementsByClassName("item");
+        .then(response => {
+            if (response.status == 200) {
+                return response
+            } else {
+                throw Error("Please Enter Character");
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+            var genstory = document.getElementsByClassName("story");
 
-        for (let index = 0; index < items.length; index++) {
-            items[index].innerHTML = response[index];
-        }
-    })
-    .catch(e => {
-        var item = document.getElementsByClassName("item")[0];
-        item.innerHTML=e;
-    })
+            genstory[0].innerHTML = context + response[0];
+
+        })
+        .catch(e => {
+            var story = document.getElementsByClassName("story")[0];
+            story.innerHTML = e;
+        })
 }
 
-function concat(newText) {
-    var context = document.getElementById("context");
-    var text = context.value;
+function readmore() {
+    var context = document.getElementsByClassName('story');
+    var model = 'gpt2-harrypotter';
+    var length = 'long';
 
-    text += newText;
+    var formData = new FormData();
 
-    context.value = text;
-    clearSelect();
-}
+    formData.append("context", context[0].innerHTML);
+    formData.append("model", model);
+    formData.append("length", length);
+    fetch(
+        "/gpt2",
+        {
+            method: "POST",
+            body: formData
+        }
+    )
+        .then(response => {
+            if (response.status == 200) {
+                return response
+            } else {
+                throw Error("Fail");
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+            var genstory = document.getElementsByClassName("story");
 
-function clearSelect() {
-    var items = document.getElementsByClassName("item");
-    for (let index = 0; index < items.length; index++) {
-        items[index].innerHTML = "";
-    }
+            genstory[0].innerHTML = context[0].innerHTML + response[0];
+
+        })
+        .catch(e => {
+            var story = document.getElementsByClassName("story")[0];
+            story.innerHTML = e;
+        })
+
 }

@@ -5,28 +5,17 @@ import random
 
 app = Flask(__name__, static_url_path='/static')
 
-models = {
-    "gpt2-large": "http://main-gpt2-large-jeong-hyun-su.endpoint.ainize.ai/gpt2-large/long",
-    "gpt2-harrypotter": "http://main-gpt2-harry-potter-fan-fiction-msh1273.endpoint.ainize.ai/gpt2-harrypotter/long"
-}
-
 
 @app.route("/gpt2", methods=["POST"])
 def gpt2():
     context = request.form['context']
-    model = request.form['model']
-    length = request.form['length']
 
-    url = models[model]
-
-    if length == "short":
-        length = random.randrange(2, 6)
-    else:
-        length = 20
+    url = "http://main-gpt2-harry-potter-fan-fiction-msh1273.endpoint.ainize.ai/gpt2-harrypotter/long"
+    length = random.randrange(150, 200)
 
     data = {
         "text": context,
-        "num_samples": 10,
+        "num_samples": 1,
         "length": length
     }
 
@@ -41,8 +30,7 @@ def main():
     return render_template("index.html")
 
 
-# Health Check
-@app.route("/healthz", methods=["GET"])
+@app.route("/health", methods=["GET"])
 def healthCheck():
     return "", 200
 

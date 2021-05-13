@@ -1,71 +1,85 @@
 <html>
-    <head>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <script src="../static/index.js"></script>
+    <script src="static/index.js"></script>
 
-        <style>
-            .item:hover {
-                color: blue;
-            }
-            body{
-                background-color: rgba(0,0,0,0);
-                background-image: url("https://www.wallpapertip.com/wmimgs/42-423566_harry-potter-boats-to-hogwarts.jpg");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: 100% 100%;
-            }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 
-        </style>
-    </head>
-    <title>generate-harrystory</title>
+        div {
+            font-family: 'Niconne', cursive;
+            font-size: 15pt;
+        }
 
-    <body>
-    <div class="container" style="margin-top: 100px">
-            <div class="jumbotron" style="background: rgba(255,255,255,0.70)">
-                <div class="row">
-                    <div class="col">
-                <h1 style="color: midnightblue" align="center">gpt2-HarryPotterFanFiction</h1><br><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                <p>This is a pre-trained GPT-2 generative text model</p>
-                <p>that allows you to generate your own Harry Potter fanfiction,</p>
-                <p>trained off of the top 100 rated fanficition stories.</p>
+        body {
+            background-color: rgba(0, 0, 0, 0);
+            background-image: url("https://www.wallpapertip.com/wmimgs/42-423566_harry-potter-boats-to-hogwarts.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+        input[type=text]:hover {
+
+        }
+
+        span {
+            color: #177199;
+        }
+
+        #paper {
+            background-image: url("../static/pixlr-bg-result.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            opacity: 0.8;
+        }
+        .story{
+            font-size: 25px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<title>harrypotter_story</title>
+
+<body>
+<div class="container" style="margin-top: 100px">
+    <div class="jumbotron" style="background: rgba(255,255,255,0.70);">
+        <div class="row">
+            <div class="col">
+                <h1 style="color: midnightblue" align="center">HarryPotter FanFiction</h1><br>
+                <h3>Introduce</h3>
+                <p>This is a pre-trained GPT-2 generative text model that allows you to generate your own Harry Potter
+                    fanfiction, trained off of the top 100 rated fanficition stories.</p>
+                <h3>How to use</h3>
+                <ol>
+                    <li>Enter a keyword or sentence in the input box below and click the <span>Start Story</span>
+                        button. ex)Harry loves Herimone
+                    </li>
+                    <li>A Harry Potter story starting with the entered keyword or sentence is created.</li>
+                    <li>The length limit for generated sentences is between 150 and 200 characters.</li>
+                    <li>Click the <span>More Story</span> button to check more stories around the created story.</li>
+                </ol>
                 <br>
-                <select id="model" style="margin-bottom: 20px;">
-                    <option value="gpt2-harrypotter">gpt2-harrypotter</option>
-                    <option value="gpt2-large">gpt2-large</option>
-                </select>
-
-                <input type="radio" name="length" checked="checked" value="short">short</input>
-                <input type="radio" name="length" value="long">long</input>
-
-                <textarea id="context" style="width:90%; height:50%; display: block; margin-bottom: 10px;"></textarea>
-                        <img>
-                    </div>
-                    <div class="col">
-                <b>Select one of the results</b>
-                <div id="select_box">
-                    <ul style="width:100%">
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                        <li class="item" onclick="concat(this.innerHTML)"></li>
-                    </ul>
-                </div>
-                <button id="btn_autocomplete" class="btn btn-primary" onclick="suggestion()">Auto Complete!</button>
-                </div>
-                    </div>
+            </div>
         </div>
-    </body>
+        <div class="row">
+            <div class="col">
+                <input type="text" id="keyword" placeholder="Harry loves Hermione">
+                <button id="Start story" class="btn btn-info" onclick="suggestion()">Start Story</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <b style="font-size: 20pt; color: #9C1A1C">It starts with you..</b><br>
+                <div class="story" id="paper" style="padding: 30% 30% 30% 30%"></div>
+                <button id="morestory" class="btn btn-info" onclick="readmore()" style="float: right;">More Story
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
