@@ -12,7 +12,6 @@ RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted
 COPY app.py /usr/src/app/
 COPY templates/index.html /usr/src/app/templates/
 COPY static/index.js /usr/src/app/static/
-COPY static/pixlr-bg-result.png /usr/src/app/static/
 WORKDIR /usr/src/app/
 # tell the port number the container should expose
 EXPOSE 5000
