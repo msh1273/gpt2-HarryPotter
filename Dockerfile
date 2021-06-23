@@ -1,7 +1,21 @@
-FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
+# our base image
+FROM alpine:3.5
 
-COPY . .
+# Install python and pip
+RUN apk add --update py2-pip
 
-RUN pip install -r requirements.txt
+# install Python modules needed by the Python app
+COPY ../requirements.txt /usr/src/app/
+RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host=files.pythonhosted.org --no-cache-dir -r /usr/src/app/requirements.txt
 
-CMD python3 app.py
+# copy files required for the app to run
+COPY app.py /usr/src/app/
+COPY templates/index.html /usr/src/app/templates/
+COPY static/index.js /usr/src/app/static/
+COPY static/pixlr-bg-result.png /usr/src/app/static/
+WORKDIR /usr/src/app/
+# tell the port number the container should expose
+EXPOSE 5000
+
+# run the application
+CMD [ "python", "/usr/src/app/app.py"]
