@@ -31,14 +31,21 @@
         }
 
         #paper {
-            background-image: url("../static/pixlr-bg-result.png");
+            background-image: url("../static/bg-paper.png");
             background-repeat: no-repeat;
             background-size: 100% 100%;
             opacity: 0.8;
         }
         .story{
+            width: auto;
+            height: 700px;
             font-size: 25px;
             font-weight: 600;
+            overflow: auto;
+            margin-top: 150px;
+            margin-bottom: 200px;
+            margin-left: 100px;
+            margin-right: 60px;
         }
     </style>
 </head>
@@ -72,9 +79,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col" id="paper">
                 <b style="font-size: 20pt; color: #9C1A1C">It starts with you..</b><br>
-                <div class="story" id="paper" style="padding: 30% 30% 30% 30%"></div>
+
+                <div class="story">
+                </div>
+
                 <button id="morestory" class="btn btn-info" onclick="readmore()" style="float: right;">More Story
                 </button>
             </div>
