@@ -1,5 +1,5 @@
 # GPT2-HarryPotterFiction
-[![Run on Ainize](https://ainize.ai/images/run_on_ainize_button.svg)](https://master-gpt2-flaskproject-msh1273.endpoint.ainize.ai)
+[![Run on Ainize](https://ainize.ai/images/run_on_ainize_button.svg)](https://master-gpt2-harry-potter-msh1273.endpoint.ainize.ai)
 
 ## GPT-2?
 GPT-2(Generative Pre-Training 2)란 OpenAI에서 만든 오픈소스 인공지능 모델입니다. GPT-2 는 텍스트를 번역하고, 질문에 답하고, 구문을 번역하고, 문장을 만들어 줍니다.
